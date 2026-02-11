@@ -1,7 +1,8 @@
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
-// import { ApiError } from "./utils/ApiError.js";
+import userRouter from "./routes/user.routes.js"
+import { ApiError } from "./utils/ApiError.js";
 const app=express();
 app.use(cors({
     origin:true,
@@ -21,7 +22,7 @@ app.use(cookieParser())
 
 //routes declaration
 
-// app.use("/api/v1/users",userRouter)
+app.use("/api/v1/users",userRouter)
 // app.use("/api/v1/posts",postRouter)
 // app.use("/api/v1/answer",answerRouter)
 

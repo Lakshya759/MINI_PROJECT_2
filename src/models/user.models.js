@@ -27,10 +27,6 @@ const userSchema= new Schema(
             type:String,
             default:null
         },
-        avatar:{
-            type:String,
-            default:""
-        },
         provider:{
             type: String,
             enum: ["local", "google"],
@@ -40,11 +36,11 @@ const userSchema= new Schema(
     },{timestamps:true}
 );
 
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
     if (!this.password) return next();
-  if (!this.isModified("password")) return next()
+  if (!this.isModified("password")) return 
   this.password = await bcrypt.hash(this.password, 10)
-  next()
+  
 })
 
 userSchema.methods.comparePassword = async function (enteredPassword) {
