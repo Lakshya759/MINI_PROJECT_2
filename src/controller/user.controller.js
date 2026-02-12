@@ -7,7 +7,21 @@ import jwt from "jsonwebtoken"
 //register user
 // 1.user will enter the data
 // 2.we will take the data and register the user and save the info in the database
+const generateAccessAndRefreshToken=async(user)=>{
+    try {
+        console.log("Access:", user.generateAccessToken);
+        console.log("Refresh:", user.generateRefreshToken);
+        console.log("Secret:", process.env.ACCESS_TOKEN_SECRET);
 
+        const accessToken=await user.generateAccessToken()
+        const refreshToken=await user.generateRefreshToken()
+        user.refreshToken=refreshToken;
+        await user.save({validateBeforeSave:false})
+        return [refreshToken,accessToken]
+    } catch (error) {
+        throw new ApiError(500,"Unable to Generate Access and Refresh Token")
+    }
+}
 
 const registerUser=asyncHandler(async(req,res)=>{
     console.log("Req Body:-----",req.body)
@@ -47,5 +61,36 @@ const registerUser=asyncHandler(async(req,res)=>{
 })
 
 
+const loginUser=asyncHandler(async(req,res)=>{
+    
 
-export {registerUser}
+    const {email,password}=req.body;
+
+    const user=await User.findOne({
+        email
+    })
+
+    if(!user){
+        throw new ApiError(404,"User Not Found")
+    }
+    console.log("the user is ", user.password);
+    const passwordValid=await user.comparePassword(password)
+    console.log(passwordValid)
+    if(!passwordValid){
+        throw new ApiError(400,"Password is wrong")
+    }
+
+    const [refreshToken,accessToken]=await generateAccessAndRefreshToken(user)
+
+    res
+    .status(201)
+    .cookie("refreshToken",refreshToken)
+    .cookie("accessToken",accessToken)
+    .json(
+       new ApiResponse(201,"Login Successful")
+    )
+})
+
+
+
+export {registerUser,loginUser}

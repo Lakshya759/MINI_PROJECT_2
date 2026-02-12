@@ -32,6 +32,9 @@ const userSchema= new Schema(
             enum: ["local", "google"],
             default: "local",
         },
+        refreshToken:{
+            type:String
+        }
         
     },{timestamps:true}
 );
