@@ -13,9 +13,9 @@ const CLOUDINARY_CONFIG = {
 // });
 
 cloudinary.config({
-  cloud_name:"dnjtrlnme",
-  api_key:"455276942132399",
-  api_secret:"cONuBM5Ilq7anA19iQ5JT_xf6Xw",
+  cloud_name:,
+  api_key:,
+  api_secret:,
 });
 
 export default cloudinary;
