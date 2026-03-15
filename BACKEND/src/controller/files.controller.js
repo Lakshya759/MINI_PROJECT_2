@@ -27,7 +27,7 @@ const fileUpload = asyncHandler(async (req, res) => {
         throw new ApiError(500, error.message);
     }
 
-    const { data: publicUrl } = supabase.storage
+    const { data: publicUrl } = await supabase.storage
         .from("files")
         .getPublicUrl(file_name);
 
@@ -81,6 +81,78 @@ const getAll=asyncHandler(async(req,res)=>{
 
 })
 
+const getSingle=asyncHandler(async(req,res)=>{
+    const id=req.params.id
+    const file=await File.findById(id)
+    if(!file){
+        throw new ApiError(404,"File Not Found ")
+    }
+    console.log(file)
+    res
+    .status(200)
+    .json(new ApiResponse(200,file,"Fetch Successful"))
+})
 
-export {fileUpload,downloadFile,getAll}
+const myUpload=asyncHandler(async(req,res)=>{
+    console.log(req.user)
+    const user=req.user
+    if(!user){
+        throw new ApiError(404,"Unauthorized Access")
+    }
+    const file=await File.find({uploadedBy:user._id})
+    if(!file){
+        res
+        .status(200)
+        .json(new ApiResponse(404,"No File Found"))
+    }
+    res
+    .status(200)
+    .json(new ApiResponse(200,file,"Fetched Succesfully"))
+
+})
+
+const searchFile=asyncHandler(async(req,res) => {
+    console.log(req.query)
+    const {title,subject}=req.query
+    const query={}
+    if(!title && !subject)  {
+        throw new ApiError(404,"Please Enter The Search Parameter")
+    }
+    if(title){
+        query.title = { $regex: title, $options: "i" };
+    }
+    if(subject){
+        query.subject={ $regex: subject, $options: "i" };
+    }
+    
+    const file=await File.find(query)
+    
+    if(!file){
+        throw new ApiError(404,"No File Found")
+    }
+    
+    res
+    .status(200)
+    .json(new ApiResponse(200,file,"File Fetched Successfully"))
+})
+
+const deleteFile=asyncHandler(async(req,res)=>{
+    const id=req.params.id
+    const file=await File.findById({_id:id})
+    if(!file){
+        throw new ApiError(404,"No File Found")
+    }
+    if(file.uploadedBy!=req.user.id){
+        throw new ApiError(404,"Unauthorised Access")
+    }
+    const delFile=await File.findByIdAndDelete({_id:id})
+    res
+    .status(200)
+    .json(new ApiResponse(200,"File Deleted Successfully"))
+})
+
+
+
+
+export {fileUpload,downloadFile,getAll,getSingle,myUpload,searchFile,deleteFile}
 

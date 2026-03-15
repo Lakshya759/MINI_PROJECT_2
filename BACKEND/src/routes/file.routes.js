@@ -1,5 +1,5 @@
 import {Router} from "express"
-import { fileUpload,downloadFile,getAll } from "../controller/files.controller.js"
+import { fileUpload,downloadFile,getAll,getSingle,myUpload,searchFile ,deleteFile} from "../controller/files.controller.js"
 import {verifyJWT} from "../middlewares/auth.middleware.js"
 import { upload } from "../middlewares/multer.middleware.js"
 const router=Router()
@@ -8,9 +8,32 @@ router.route("/upload").post(
     verifyJWT,upload.single("file"),
     fileUpload
 )
+router.route("/download/:id").get(
+    verifyJWT,downloadFile
+)
+router.route("/").get(
+    verifyJWT,getAll
+)
 
-router.get("/download/:id", downloadFile);
-router.get("/",getAll)
+router.route("/search").get(
+    verifyJWT,searchFile
+)
+router.route("/delete/:id").delete(
+    verifyJWT,deleteFile
+)
+
+router.route("/:id").get(
+    verifyJWT,getSingle
+)
+router.route("/my/upload").get(
+    verifyJWT,myUpload
+)
+
+
+
+
+
+
 
 
 
