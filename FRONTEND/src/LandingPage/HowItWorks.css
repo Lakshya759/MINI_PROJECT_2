@@ -1,0 +1,109 @@
+.how{
+padding:80px 10%;
+background:#f8fafc;
+}
+
+.how-header{
+text-align:center;
+margin-bottom:60px;
+}
+
+.how-header h2{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.how-header span{
+color:#3b395d;
+}
+
+.how-header p{
+color:#666;
+max-width:600px;
+margin:auto;
+}
+
+/* CONTAINER */
+
+.how-container{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:60px;
+}
+
+/* STEPS */
+
+.steps{
+flex:1;
+display:flex;
+flex-direction:column;
+gap:40px;
+}
+
+.step{
+display:flex;
+gap:20px;
+align-items:flex-start;
+}
+
+.step-icon{
+width:50px;
+height:50px;
+background: linear-gradient(to right, #2b4c6f, #6b7f93);
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:20px;
+flex-shrink:0;
+}
+
+.step-number{
+color:#3b395d;
+font-size:14px;
+font-weight:600;
+}
+
+.step h3{
+margin:4px 0 6px;
+font-size:18px;
+}
+
+.step p{
+color:#666;
+font-size:14px;
+line-height:1.6;
+max-width:400px;
+}
+
+/* IMAGE */
+
+.how-image{
+flex:1;
+display:flex;
+justify-content:center;
+}
+
+.how-image img{
+width:100%;
+max-width:420px;
+border-radius:18px;
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* RESPONSIVE */
+
+@media (max-width:900px){
+
+.how-container{
+flex-direction:column;
+text-align:left;
+}
+
+.how-image img{
+max-width:100%;
+}
+
+}

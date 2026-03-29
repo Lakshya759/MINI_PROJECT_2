@@ -1,0 +1,123 @@
+.footer{
+background:#0f172a;
+color:#cbd5f1;
+padding:70px 10% 30px;
+}
+
+/* CONTAINER */
+
+.footer-container{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+gap:60px;
+margin-bottom:40px;
+}
+
+/* BRAND */
+
+.footer-logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:20px;
+font-weight:600;
+color:white;
+margin-bottom:20px;
+}
+
+.logo-icon{
+width:40px;
+height:40px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+background: linear-gradient(to right, #2b4c6f, #6b7f93);
+color:white;
+}
+
+.footer-desc{
+line-height:1.6;
+margin-bottom:20px;
+max-width:300px;
+}
+
+/* SOCIAL */
+
+.social-icons{
+display:flex;
+gap:15px;
+}
+
+.social-icons span{
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+background:#1e293b;
+cursor:pointer;
+transition:0.2s;
+}
+
+.social-icons span:hover{
+background:#334155;
+}
+
+/* LINKS */
+
+.footer-links{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.footer-links h4{
+color:white;
+margin-bottom:10px;
+}
+
+.footer-links a{
+text-decoration:none;
+color:#cbd5f1;
+font-size:15px;
+transition:0.2s;
+}
+
+.footer-links a:hover{
+color:white;
+}
+
+/* BOTTOM */
+
+.footer-bottom{
+border-top:1px solid #1e293b;
+text-align:center;
+padding-top:25px;
+font-size:14px;
+color:#94a3b8;
+}
+
+/* RESPONSIVE */
+
+@media (max-width:900px){
+
+.footer-container{
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+}
+
+@media (max-width:600px){
+
+.footer-container{
+grid-template-columns:1fr;
+}
+
+.footer-desc{
+max-width:100%;
+}
+
+}
