@@ -1,0 +1,136 @@
+/* 🔥 OVERLAY (blur background) */
+.account-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  display: flex;
+  justify-content: center;   /* ✅ center horizontally */
+  align-items: center;       /* ✅ center vertically */
+
+  padding: 20px;
+
+  z-index: 1000;
+}
+
+/* 🎯 ACCOUNT CARD */
+.account-card {
+  width: 300px;        /* 🔥 smaller */
+  max-width: 90%;
+
+  padding: 18px;       /* slightly compact */
+  border-radius: 12px;
+
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+
+  animation: dropdown 0.25s ease;
+
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* ✨ HEADER */
+.account-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #3b395d, #4f46e5);
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* 🧾 FORM */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+
+  background: #f9fafb;
+  font-size: 14px;
+}
+
+/* divider */
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 18px 0;
+}
+
+/* 🚪 LOGOUT BUTTON */
+.logout-btn {
+  width: 100%;
+  padding: 10px;
+
+  border-radius: 8px;
+  border: 1px solid #ef4444;
+
+  background: transparent;
+  color: #ef4444;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* ✨ ANIMATION */
+@keyframes dropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 500px) {
+  .account-overlay {
+    justify-content: center;
+    align-items: flex-start;
+    padding: 70px 10px;
+  }
+
+  .account-card {
+    width: 100%;
+    max-width: 350px;
+  }
+}

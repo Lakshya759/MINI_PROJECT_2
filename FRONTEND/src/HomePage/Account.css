@@ -1,0 +1,114 @@
+.account-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  background: #f3f4f6;
+  padding: 20px;
+}
+
+/* CARD */
+.account-card {
+  width: 100%;
+  max-width: 500px;
+
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.account-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+
+  background: #f9fafb;
+  font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 20px 0;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+  width: 100%;
+  padding: 12px;
+
+  border-radius: 10px;
+  border: 1px solid #ef4444;
+
+  background: transparent;
+  color: #ef4444;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 500px) {
+  .account-card {
+    padding: 20px;
+  }
+
+  .avatar {
+    width: 50px;
+    height: 50px;
+  }
+}

@@ -8,11 +8,15 @@ router.route("/upload").post(
     verifyJWT,upload.single("file"),
     fileUpload
 )
+// router.route("/upload").post(
+//     upload.single("file"),
+//     fileUpload
+// )
 router.route("/download/:id").get(
     verifyJWT,downloadFile
 )
 router.route("/").get(
-    verifyJWT,getAll
+    getAll
 )
 
 router.route("/search").get(

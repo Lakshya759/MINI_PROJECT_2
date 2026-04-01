@@ -1,20 +1,36 @@
 import React from "react";
-import "./Dashboard.css"
-function NoteCard({ note }) {
-  return (
-    <div className="card">
-      <img src={note.image} alt="" />
+import "./Dashboard.css";
+const NoteCard = ({  data ,onClick}) => {
+  function formatDate(isoDate) {
+    const date = new Date(isoDate);
 
-      <div className="card-content">
-        <p className="pages">{note.pages}</p>
-        <h3>{note.title}</h3>
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  }
+  return (
+    <div className="card" onClick={onClick}>
+      <img src="https://picsum.photos/300/200?1" alt="" />
+      <span className="badge">Shared</span>
+      <div className="pages">{data.downloadCount} Downloads</div>
+
+      <div className="card-body">
+        <h3>{data.title}</h3>
         <div className="meta">
-          <span>{note.date}</span>
-          <span>{note.size}</span>
+          <span>{formatDate(data.createdAt)}</span>
+          <span>{data.fileSize / 1024} KB</span>
+        </div>
+
+        <div className="tags">
+          {data.tags &&
+            data.tags.length > 0 &&
+            data.tags.map((item, index) => <span key={index}>{item}</span>)}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default NoteCard;

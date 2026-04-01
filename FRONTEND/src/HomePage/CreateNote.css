@@ -1,0 +1,97 @@
+.create-note {
+  padding: 20px;
+}
+
+.create-note h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.form {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.create-btn {
+  padding: 12px;
+  background-color: #3b395d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.create-btn:hover {
+  background-color: #3b395d;
+}
+
+.tag-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f3f4f6;
+  padding: 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.form-group textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  min-height: 100px;
+  resize: vertical; /* allows vertical resize only */
+  font-family: inherit;
+  font-size: 14px;
+}
+.tag-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+
+/* Hover effect */
+.tag-chip:hover {
+  background: #e5e7eb;
+}
+
+/* Selected state */
+.tag-chip.active {
+  background: #3b395d;
+  color: white;
+  border: 1px solid #3b395d;
+}

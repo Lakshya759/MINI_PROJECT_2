@@ -80,13 +80,41 @@ const loginUser=asyncHandler(async(req,res)=>{
 
     res
     .status(201)
-    .cookie("refreshToken",refreshToken)
-    .cookie("accessToken",accessToken)
+    .cookie("refreshToken",refreshToken, {
+  httpOnly: true,
+  secure: false, // true in production (https)
+  sameSite: "lax",
+})
+    .cookie("accessToken",accessToken, {
+  httpOnly: true,
+  secure: false, // true in production (https)
+  sameSite: "lax",
+})
     .json(
        new ApiResponse(201,"Login Successful")
     )
 })
 
+const getUser=asyncHandler(async(req,res)=>{
+    const users=req.user;
+    console.log(users)
+
+    if(users){
+        return res
+        .status(200)
+        .json(
+                new ApiResponse(
+                    200,
+                    users,
+                    "User Fetched Successfully"
+                )
+            )
+    }
+    else{
+        throw new ApiError(400,"User Not Found")
+    }
+})
 
 
-export {registerUser,loginUser}
+
+export {registerUser,loginUser,getUser}
