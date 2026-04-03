@@ -1,6 +1,6 @@
 import React from "react";
 import "./Dashboard.css";
-const Sidebar = ({setView,fetchNotes,clickUser}) => {
+const Sidebar = ({setView,fetchNotes,clickUser,user}) => {
   const handleAll=()=>{
     setView("all");
     fetchNotes()
@@ -43,8 +43,8 @@ const Sidebar = ({setView,fetchNotes,clickUser}) => {
         <div className="profile" onClick={()=>clickUser()}>
           <div className="avatar">JD</div>
           <div>
-            <p>John Doe</p>
-            <span>john@example.com</span>
+            <p>{user.name}</p>
+            <span>{user.email}</span>
           </div>
         </div>
       </aside>

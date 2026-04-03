@@ -1,39 +1,49 @@
-.account-container {
+/* 🔥 OVERLAY (centered + blur) */
+.account-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 
-  background: #f3f4f6;
-  padding: 20px;
+  z-index: 1000;
 }
 
-/* CARD */
+/* 🎯 CARD (small + no overflow) */
 .account-card {
-  width: 100%;
-  max-width: 500px;
+  width: 350px;
+  max-width: 90%;
 
   background: #ffffff;
-  padding: 30px;
-  border-radius: 16px;
+  padding: 16px;
+  border-radius: 12px;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  animation: popup 0.2s ease;
+
+  overflow: hidden; /* ✅ no scroll */
 }
 
-/* HEADER */
+/* ✨ HEADER */
 .account-header {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 25px;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  background: linear-gradient(135deg, #3b395d, #4f46e5);
   color: white;
 
   display: flex;
@@ -41,56 +51,52 @@
   align-items: center;
 
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
 }
 
-/* FORM */
+/* 🧾 FORM */
 .form-group {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .label {
   display: block;
-  font-size: 14px;
-  color: #374151;
-  margin-bottom: 6px;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
 }
 
 .input {
   width: 100%;
-  padding: 12px;
+  padding: 8px 10px;
 
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
 
   background: #f9fafb;
-  font-size: 14px;
+  font-size: 13px;
 }
 
-.input:focus {
-  outline: none;
-  border-color: #2563eb;
-}
-
-/* DIVIDER */
+/* divider */
 .divider {
   height: 1px;
   background: #e5e7eb;
-  margin: 20px 0;
+  margin: 12px 0;
 }
 
-/* LOGOUT BUTTON */
+/* 🚪 LOGOUT BUTTON */
 .logout-btn {
   width: 100%;
-  padding: 12px;
+  padding: 8px;
 
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid #ef4444;
 
   background: transparent;
   color: #ef4444;
 
   font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
 
   transition: all 0.2s ease;
@@ -101,14 +107,39 @@
   color: white;
 }
 
-/* RESPONSIVE */
-@media (max-width: 500px) {
-  .account-card {
-    padding: 20px;
+/* ✨ ANIMATION */
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
-  .avatar {
-    width: 50px;
-    height: 50px;
+/* 📱 RESPONSIVE */
+@media (max-width: 400px) {
+  .account-card {
+    width: 90%;
+    padding: 14px;
   }
+}
+
+.close-bt {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+
+  color: #6b7280;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  color: #ef4444;
 }

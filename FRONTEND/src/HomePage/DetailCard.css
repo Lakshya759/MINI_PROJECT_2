@@ -1,136 +1,153 @@
-/* 🔥 OVERLAY (blur background) */
-.account-overlay {
+.modal-overlay {
   position: fixed;
-  inset: 0;
-
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-
-  display: flex;
-  justify-content: center;   /* ✅ center horizontally */
-  align-items: center;       /* ✅ center vertically */
-
-  padding: 20px;
-
-  z-index: 1000;
-}
-
-/* 🎯 ACCOUNT CARD */
-.account-card {
-  width: 300px;        /* 🔥 smaller */
-  max-width: 90%;
-
-  padding: 18px;       /* slightly compact */
-  border-radius: 12px;
-
-  background: #ffffff;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-
-  animation: dropdown 0.25s ease;
-
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-/* ✨ HEADER */
-.account-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-
-  background: linear-gradient(135deg, #3b395d, #4f46e5);
-  color: white;
-
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-
-  font-weight: bold;
-  font-size: 18px;
+  padding: 20px;
+  box-sizing: border-box;
 }
-
-/* 🧾 FORM */
-.form-group {
-  margin-bottom: 15px;
+.modal-container {
+  width: 70%;
+  max-width: 1100px;
+  background: #f9fafb;
+  border-radius: 16px;
+  display: flex;
+  max-height: 90vh;
+  overflow-y: auto; /* overflow: hidden; */
+} /* LEFT */
+.modal-left {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
-
-.label {
-  display: block;
-  font-size: 13px;
-  color: #6b7280;
-  margin-bottom: 5px;
+.preview-box {
+  flex: 1;
+  background: #e5e7eb;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.input {
+.preview-image {
   width: 100%;
-  padding: 10px 12px;
-
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+.btn {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.primary {
+  background: #3b395d;
+  color: white;
+  text-align: center;
+}
+.primary:hover {
+  background: #3b395d;
+} /* RIGHT */
+.modal-right {
+  width: 350px;
+  background: white;
+  padding: 20px;
+  border-left: 1px solid #e5e7eb;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.close-btn {
+  cursor: pointer;
+  font-size: 20px;
+}
+.icon-actions {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+.icon-btn {
+  padding: 8px 10px;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
-
   background: #f9fafb;
+  cursor: pointer;
+}
+.icon-btn.delete {
+  color: red;
+}
+.section {
+  margin-top: 20px;
+}
+.section h4 {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
   font-size: 14px;
 }
-
-/* divider */
-.divider {
-  height: 1px;
-  background: #e5e7eb;
-  margin: 18px 0;
+.tags {
+  display: flex;
+  gap: 10px;
 }
-
-/* 🚪 LOGOUT BUTTON */
-.logout-btn {
-  width: 100%;
-  padding: 10px;
-
-  border-radius: 8px;
-  border: 1px solid #ef4444;
-
-  background: transparent;
-  color: #ef4444;
-
-  font-weight: 600;
-  cursor: pointer;
-
-  transition: all 0.2s ease;
+.tag {
+  background: #e0ecff;
+  color: #3b395d;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
 }
-
-.logout-btn:hover {
-  background: #ef4444;
-  color: white;
+.sharing-box {
+  background: #f3f4f6;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-
-/* ✨ ANIMATION */
-@keyframes dropdown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.98);
+.dot {
+  width: 8px;
+  height: 8px;
+  background: green;
+  border-radius: 50%;
+} /* 🔥 RESPONSIVE */
+@media (max-width: 900px) {
+  .modal-container {
+    flex-direction: column;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* 📱 RESPONSIVE */
-@media (max-width: 500px) {
-  .account-overlay {
-    justify-content: center;
-    align-items: flex-start;
-    padding: 70px 10px;
-  }
-
-  .account-card {
+  .modal-right {
     width: 100%;
-    max-width: 350px;
+    border-left: none;
+    border-top: 1px solid #e5e7eb;
   }
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3); /* dim effect */
+  backdrop-filter: blur(8px); /* 🔥 blur */
+  -webkit-backdrop-filter: blur(8px); /* for Safari */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }

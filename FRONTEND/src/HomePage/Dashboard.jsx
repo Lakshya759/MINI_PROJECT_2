@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [view, setView] = useState("all");
   const [selectedNote, setSelectedNote] = useState(null);
   const [account,setAccount]=useState(false);
+  const [user,setUser]=useState("")
   const clickUser=()=>{
     setAccount(true);
   }
@@ -23,6 +24,9 @@ const Dashboard = () => {
   const closeModal = () => {
     setSelectedNote(null); // close modal
   };
+  const closeUser=()=>{
+    setAccount(!account)
+  }
   const fetchNotes = async () => {
     try {
       const res = await axios.get(`http://localhost:8000/api/v1/file`);
@@ -33,15 +37,33 @@ const Dashboard = () => {
       console.log(error);
     }
   };
+
+
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8000/api/v1/users/user`,{
+          withCredentials: true,
+        });
+      if (res) {
+        setUser(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
   // fetchNotes()
   useEffect(() => {
     fetchNotes();
+    fetchUser();
   }, []);
 
   return (
     <div className="containers">
       {/* SIDEBAR */}
-      <Sidebar setView={setView} fetchNotes={fetchNotes} clickUser={clickUser}/>
+      <Sidebar setView={setView} fetchNotes={fetchNotes} clickUser={clickUser} user={user}/>
 
       {/* MAIN */}
       <main className="main">
@@ -63,7 +85,7 @@ const Dashboard = () => {
               {selectedNote && (
                 <DetailCard note={selectedNote} onClose={closeModal} />
               )}
-              {account && <Account onClose={() => setAccount(false)} />}
+              {account && <Account onClose={closeUser} user={user} />}
               
             </>
           )}

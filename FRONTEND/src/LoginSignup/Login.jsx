@@ -8,8 +8,14 @@ function Login() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [error, setError] = useState("");
+  const [loading,setLoading]=useState(false);
+  
   const navigate = useNavigate();
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    setLoading(true)
+    e.preventDefault();
+    setError("")
     try {
       console.log(email);
       console.log(password);
@@ -23,15 +29,25 @@ function Login() {
           withCredentials: true,
         },
       );
-
-      console.log("Login Success:", res.data);
-      navigate("/home");
-    } catch (error) {
+      if(res.data.success){
+        console.log("Login Success:", res.data);
+        navigate("/home");
+      }
+      
+    } catch (err) {
+      setError("Email or Password Is Incorrect")
       console.log("Login Error:", error.response?.data);
     }
+    finally{
+      setLoading(false)
+    }
+
   };
 
-  const handleSignup = async () => {
+  const handleSignup = async (e) => {
+    setLoading(true)
+    e.preventDefault();
+    setError("")
     try {
       console.log(email);
       console.log(password);
@@ -56,10 +72,28 @@ function Login() {
       setFirstName("");
       setLastName("");
       setIsLogin(true); // switch to login
-    } catch (error) {
+    } catch (err) {
+      if (err.response) {
+        setError(err.response.data.message);
+      } else {
+        setError("Something went wrong!");
+      }
       console.log("Signup Error:", error.response?.data);
     }
+    finally{
+      setLoading(false)
+    }
   };
+
+  const toggleLogin=()=>{
+    setIsLogin(!isLogin)
+    setError("")
+  }
+
+  // const toggleLogin=()=>{
+  //   setIsLogin(true)
+  //   setError("")
+  // }
   return (
     <div className="mContainer">
       <div className="container">
@@ -95,11 +129,10 @@ function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-
-                <div className="forgot">Forgot Password?</div>
-
-                <button className="main-btn" onClick={handleLogin}>
-                  Log in
+              <p>{error}</p>
+                <button className="main-btn" onClick={handleLogin} disabled={loading}>
+                  {loading ? "Logging In..." : "Log in"}
+                  
                 </button>
               </>
             ) : (
@@ -107,7 +140,7 @@ function Login() {
                 <h1>Create an Account</h1>
                 <p>
                   Already have an account?{" "}
-                  <span onClick={() => setIsLogin(true)} className="link">
+                  <span onClick={() => toggleLogin()} className="link">
                     Log in
                   </span>
                 </p>
@@ -141,9 +174,10 @@ function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-
-                <button className="main-btn" onClick={handleSignup}>
-                  Create Account
+                <p>{error}</p>
+                <button className="main-btn" onClick={handleSignup} disable={loading}>
+                  {loading ? "Creating Account..." : "Create Account"}
+                  
                 </button>
               </>
             )}
