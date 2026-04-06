@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import "./DetailCard.css";
-import { Link } from 'react-router-dom'
-const DetailCard = ({note,onClose}) => {
-    function formatDate(isoDate) {
+import { Link } from "react-router-dom";
+import axios from "axios";
+const DetailCard = ({ note, onClose ,favNote, onToggleFavourite}) => {
+  const [isFavourite, setIsFavourite] = useState(false);
+
+
+
+  useEffect(() => {
+  if (favNote && note?._id) {
+    const isFav = favNote.some(fav => fav._id === note._id);
+    setIsFavourite(isFav);
+  }
+}, [favNote, note]);
+
+
+
+  const [loading, setLoading] = useState(false);
+  function formatDate(isoDate) {
     const date = new Date(isoDate);
 
     const day = String(date.getDate()).padStart(2, "0");
@@ -11,10 +26,33 @@ const DetailCard = ({note,onClose}) => {
 
     return `${day}-${month}-${year}`;
   }
+
+  const addFavourite = async () => {
+  try {
+    setIsFavourite(prev => !prev);
+    setLoading(true);
+
+    await axios.post(
+      "http://localhost:8000/api/v1/file/favourite",
+      { fileId: note._id },
+      { withCredentials: true }
+    );
+
+    // ✅ THIS IS THE KEY FIX
+    onToggleFavourite(note);
+
+  } catch (err) {
+    setIsFavourite(prev => !prev);
+    console.log(err.response?.data || err.message);
+  } finally {
+    setLoading(false);
+  }
+
+};
+
   return (
     <div className="modal-overlay">
       <div className="modal-container">
-
         {/* LEFT SIDE */}
         <div className="modal-left">
           <div className="preview-box">
@@ -26,8 +64,21 @@ const DetailCard = ({note,onClose}) => {
           </div>
 
           <div className="action-buttons">
-            <a href={note.fileUrl} className="btn primary" target="_blank" >Download</a>
-            
+            <a href={note.fileUrl} className="btn primary" target="_blank">
+              Download
+            </a>
+            <button
+              onClick={addFavourite}
+              disabled={loading}
+              style={{
+                fontSize: "20px",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              {isFavourite ? "❤️" : "🤍"}
+            </button>
           </div>
         </div>
 
@@ -35,7 +86,9 @@ const DetailCard = ({note,onClose}) => {
         <div className="modal-right">
           <div className="header">
             <h2>{note.title}</h2>
-            <span className="close-btn" onClick={onClose}>×</span>
+            <span className="close-btn" onClick={onClose}>
+              ×
+            </span>
           </div>
 
           <div className="icon-actions">
@@ -45,14 +98,10 @@ const DetailCard = ({note,onClose}) => {
           <div className="section">
             <h4>DOCUMENT INFO</h4>
 
-            
-
             <div className="info-row">
               <span>Size:</span>
-              <span>{(note.fileSize/(1024*1024)).toFixed(2)} MB</span>
+              <span>{(note.fileSize / (1024 * 1024)).toFixed(2)} MB</span>
             </div>
-
-            
 
             <div className="info-row">
               <span>Created:</span>
@@ -63,10 +112,10 @@ const DetailCard = ({note,onClose}) => {
               <span>Owner:</span>
               <span>{note.uploadedBy.name}</span>
             </div>
-            <div className="info-row">
+            {/* <div className="info-row">
               <span>Download Count</span>
               <span>{note.downloadCount}</span>
-            </div>
+            </div> */}
           </div>
 
           <div className="section">
@@ -84,7 +133,6 @@ const DetailCard = ({note,onClose}) => {
               {`Downloaded by ${note.downloadCount} people`}
             </div>
           </div>
-
         </div>
       </div>
     </div>

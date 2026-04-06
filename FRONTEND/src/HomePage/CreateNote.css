@@ -95,3 +95,20 @@
   color: white;
   border: 1px solid #3b395d;
 }
+.progress-bar {
+  width: 100%;
+  background: #eee;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.progress-fill {
+  height: 8px;
+  background: #4caf50;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+.tag-chip.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

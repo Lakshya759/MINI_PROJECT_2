@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="hero-left">
 
         <div className="badge">
-          ⭐ Trusted by 50,000+ students worldwide
+          
         </div>
 
         <h1>

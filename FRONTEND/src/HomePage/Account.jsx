@@ -1,8 +1,23 @@
-import React from "react";
+import{useState} from "react";
+
+import { useNavigate} from "react-router-dom";
 import "./Account.css";
 import axios from "axios";
 const Account = ({ onClose,user }) => {
-  
+  const navigate = useNavigate();
+  const [loading,setLoading]=useState(false)
+  const logout=async ()=>{
+    setLoading(true)
+    try {
+      const res=await axios.get("http://localhost:8000/api/v1/users/logout",{withCredentials:true})
+      if(res.data.success){
+        navigate("/",{ replace: true });
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+    setLoading(false)
+  }
   
   return (
     <div className="account-overlay">
@@ -49,9 +64,9 @@ const Account = ({ onClose,user }) => {
           <div className="divider"></div>
 
           {/* Logout Button */}
-          <button className="logout-btn">
-            ⎋ Logout
-          </button>
+          <button className="logout-btn" onClick={logout} disabled={loading}>
+  {loading ? "Logging out..." : "⎋ Logout"}
+</button>
 
         </div>
       </div>

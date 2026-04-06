@@ -1,8 +1,10 @@
+import mongoose from "mongoose";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {File} from "../models/files.models.js"
 import { supabase } from "../utils/supabase.js";
+import { User } from "../models/user.models.js";
 const fileUpload = asyncHandler(async (req, res) => {
     console.log(req.body)
     const { title, description, subject, tags } = req.body;
@@ -150,9 +152,77 @@ const deleteFile=asyncHandler(async(req,res)=>{
     .status(200)
     .json(new ApiResponse(200,"File Deleted Successfully"))
 })
+ 
+
+const favouriteFile = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+    const { fileId } = req.body;
+
+    if (!fileId || !mongoose.Types.ObjectId.isValid(fileId)) {
+        throw new ApiError(400, "Invalid File ID");
+    }
+
+    const file = await File.findById(fileId);
+    if (!file) {
+        throw new ApiError(404, "File Not Found");
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+        throw new ApiError(404, "User Not Found");
+    }
+
+    const isFav = user.favourites.includes(fileId);
+
+    // ✅ DEFINE update here
+    const update = isFav
+        ? { $pull: { favourites: fileId } }   // remove
+        : { $addToSet: { favourites: fileId } }; // add
+
+    const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        update,
+        { returnDocument: "after" }
+    );
+
+    res.status(200).json(
+        new ApiResponse(
+            200,
+            updatedUser.favourites,
+            isFav
+                ? "Removed from favourites"
+                : "Added to favourites"
+        )
+    );
+});
+
+const getFavourites = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+
+    const user = await User.findById(userId)
+        .populate({
+            path: "favourites",
+            populate: {
+                path: "uploadedBy",
+                select: "name email"
+            }
+        });
+
+    if (!user) {
+        throw new ApiError(404, "User Not Found");
+    }
+
+    res.status(200).json(
+        new ApiResponse(
+            200,
+            user.favourites,
+            "Favourites fetched successfully"
+        )
+    );
+});
 
 
 
 
-export {fileUpload,downloadFile,getAll,getSingle,myUpload,searchFile,deleteFile}
+export {fileUpload,downloadFile,getAll,getSingle,myUpload,searchFile,deleteFile,favouriteFile,getFavourites}
 

@@ -1,24 +1,25 @@
 import React from "react";
 import "./Dashboard.css";
-const Sidebar = ({setView,fetchNotes,clickUser,user}) => {
+import axios from "axios"
+const Sidebar = ({setView,fetchNotes,clickUser,user,setFavNote}) => {
   const handleAll=()=>{
     setView("all");
     fetchNotes()
   }
+  
   return (
     <>
       <aside className="sidebar">
+        <div>
         <div className="logo">
-          📘 <span>NotesHub</span>
+          📘 <span>ShareSphere</span>
         </div>
         <button className="new-note" onClick={() => setView("create")}>+ New Note</button>
         
 
         <nav className="menu">
           <p className="active" onClick={()=>handleAll()}>🏠 All Notes</p>
-          <p>⭐ Favorites</p>
-          <p>👥 Shared with me</p>
-          <p>🗑 Trash</p>
+          <p onClick={()=>setView("favourite")}>⭐ Favorites</p>
         </nav>
 
         {/* <div className="folders">
@@ -39,9 +40,9 @@ const Sidebar = ({setView,fetchNotes,clickUser,user}) => {
             📁 Research <span>15</span>
           </p>
         </div> */}
-
+        </div>
         <div className="profile" onClick={()=>clickUser()}>
-          <div className="avatar">JD</div>
+          <div className="avatar">{user.name[0].toUpperCase()}</div>
           <div>
             <p>{user.name}</p>
             <span>{user.email}</span>

@@ -94,7 +94,7 @@ body {
 /* TOPBAR */
 .topbar {
   padding: 15px;
-  background: #fff;
+  background: #ffffff;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #ddd;
@@ -117,7 +117,7 @@ body {
   padding: 8px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  background: #fff;
+  background: #ffff;
 }
 
 /* CONTENT */

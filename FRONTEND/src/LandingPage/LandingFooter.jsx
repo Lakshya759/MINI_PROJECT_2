@@ -11,7 +11,7 @@ const LandingFooter = () => {
 
           <div className="footer-logo">
             <div className="logo-icon">📄</div>
-            <span>NotesHub</span>
+            <span>ShareSphere</span>
           </div>
 
           <p className="footer-desc">
@@ -33,27 +33,16 @@ const LandingFooter = () => {
 
 
         {/* Company */}
-        <div className="footer-links">
-          <h4>Company</h4>
-          <a href="#">About Us</a>
-          <a href="#">Contact</a>
-        </div>
+        
 
 
         {/* Legal */}
-        <div className="footer-links">
-          <h4>Legal</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookie Policy</a>
-          <a href="#">Licenses</a>
-        </div>
-
+        
       </div>
 
 
       <div className="footer-bottom">
-        © 2026 NotesHub. All rights reserved.
+        © 2026 ShareSphere .All rights reserved.
       </div>
 
     </footer>

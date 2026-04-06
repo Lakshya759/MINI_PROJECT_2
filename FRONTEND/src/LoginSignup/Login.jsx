@@ -31,10 +31,10 @@ function Login() {
       );
       if(res.data.success){
         console.log("Login Success:", res.data);
-        navigate("/home");
+        navigate("/home",{ replace: true });
       }
       
-    } catch (err) {
+    } catch (error) {
       setError("Email or Password Is Incorrect")
       console.log("Login Error:", error.response?.data);
     }

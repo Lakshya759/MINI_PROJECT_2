@@ -32,14 +32,14 @@ const Features = () => {
           </p>
         </div>
 
-        <div class="feature-card">
+        {/* <div class="feature-card">
           <div class="icon green">📁</div>
           <h3>Smart Organization</h3>
           <p>
             Organize notes by subject, topic, or course. Create collections and
             manage your library effortlessly.
           </p>
-        </div>
+        </div> */}
 
         <div class="feature-card">
           <div class="icon orange">🔍</div>
@@ -50,14 +50,14 @@ const Features = () => {
           </p>
         </div>
 
-        <div class="feature-card">
+        {/* <div class="feature-card">
           <div class="icon red">🛡</div>
           <h3>Secure Storage</h3>
           <p>
             Your notes are stored securely with enterprise-grade encryption.
             Access them anytime, anywhere.
           </p>
-        </div>
+        </div> */}
 
         <div class="feature-card">
           <div class="icon teal">👥</div>

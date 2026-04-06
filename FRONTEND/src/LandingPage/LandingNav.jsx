@@ -9,7 +9,7 @@ const LandingNav = () => {
 
         <div className="logo">
           <div className="logo-icon">📄</div>
-          <span className="logo-text">NotesHub</span>
+          <span className="logo-text">ShareSphere</span>
         </div>
 
         <div className="nav-links">
