@@ -42,7 +42,7 @@ const Sidebar = ({setView,fetchNotes,clickUser,user,setFavNote}) => {
         </div> */}
         </div>
         <div className="profile" onClick={()=>clickUser()}>
-          <div className="avatar">{user.name[0].toUpperCase()}</div>
+          <div className="avatar">{user?.name?.[0].toUpperCase()}</div>
           <div>
             <p>{user.name}</p>
             <span>{user.email}</span>

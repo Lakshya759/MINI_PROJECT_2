@@ -20,11 +20,11 @@ const Account = ({ onClose,user }) => {
   }
   
   return (
-    <div className="account-overlay">
+    <div className="account-overlay" onClick={onClose}>
       
       <div
         className="account-container"
-        // onClick={(e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="account-card">
 

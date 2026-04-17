@@ -51,8 +51,8 @@ const DetailCard = ({ note, onClose ,favNote, onToggleFavourite}) => {
 };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-container">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         {/* LEFT SIDE */}
         <div className="modal-left">
           <div className="preview-box">
@@ -84,11 +84,12 @@ const DetailCard = ({ note, onClose ,favNote, onToggleFavourite}) => {
 
         {/* RIGHT SIDE */}
         <div className="modal-right">
-          <div className="header">
-            <h2>{note.title}</h2>
-            <span className="close-btn" onClick={onClose}>
+          <span className="close-btn" onClick={onClose}>
               ×
             </span>
+          <div className="header">
+            <h2>{note.title}</h2>
+            
           </div>
 
           <div className="icon-actions">
