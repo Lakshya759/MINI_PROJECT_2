@@ -122,8 +122,9 @@ const DetailCard = ({ note, onClose ,favNote, onToggleFavourite}) => {
           <div className="section">
             <h4>TAGS</h4>
             <div className="tags">
-              <span className="tag">Work</span>
-              <span className="tag">Meetings</span>
+              {note.tags.map((item) => (
+                  <span className="tag">{item}</span>
+                ))}
             </div>
           </div>
 

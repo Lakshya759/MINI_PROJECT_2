@@ -184,11 +184,7 @@ function Login() {
 
             {/* COMMON PART */}
 
-            <div className="divider">or</div>
-
-            <div className="social">
-              <button>Continue with Google</button>
-            </div>
+            
           </div>
         </div>
       </div>
